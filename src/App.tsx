@@ -1,8 +1,12 @@
+import { FloatingIcons } from "./components/FloatingIcons";
+import { SiteNavbar } from "./components/SiteNavbar";
+
 export function App() {
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <button className="bg-primary text-white p-2 rounded">hello react</button>
-    </div>
+    <>
+      <SiteNavbar />
+      <FloatingIcons />
+    </>
   );
 }
 
