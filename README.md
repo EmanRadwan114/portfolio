@@ -1,2 +1,3 @@
-# portfolio
-My Portfolio built with React, TypeScript and Shadcn/ui
+# React + TypeScript + Vite + shadcn/ui
+
+This is a template for a new Vite project with React, TypeScript, and shadcn/ui.
