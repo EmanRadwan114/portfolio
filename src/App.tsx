@@ -1,4 +1,5 @@
 import { FloatingIcons } from "./components/FloatingIcons";
+import { Navs } from "./components/Navs";
 import { SiteNavbar } from "./components/SiteNavbar";
 
 export function App() {
@@ -6,6 +7,7 @@ export function App() {
     <>
       <SiteNavbar />
       <FloatingIcons />
+      <Navs />
     </>
   );
 }

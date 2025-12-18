@@ -1,4 +1,3 @@
-import React from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
   IconBrandGithub,
@@ -26,7 +25,7 @@ const links = [
 
 export function FloatingIcons() {
   return (
-    <div className="flex items-center justify-center h-140 w-full">
+    <div className="flex items-center justify-center w-full">
       <FloatingDock items={links} />
     </div>
   );
