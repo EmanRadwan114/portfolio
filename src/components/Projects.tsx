@@ -3,7 +3,7 @@
 import { ProjectCard } from "./ui/ProjectCard";
 import { Tabs } from "./ui/tabs";
 
-export function Navs() {
+export function Projects() {
   const tabs = [
     {
       title: "featured",
@@ -33,7 +33,7 @@ export function Navs() {
   ];
 
   return (
-    <div className="relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
+    <div className="relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start py-10">
       <Tabs tabs={tabs} />
     </div>
   );

@@ -1,4 +1,5 @@
 import { FloatingDock } from "@/components/ui/floating-dock";
+import { socialLinks } from "@/data/profileInfo";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
@@ -7,19 +8,19 @@ import {
 
 const links = [
   {
-    title: "Linkedin",
+    title: socialLinks[0].title,
     icon: <IconBrandLinkedin className="h-full w-full" />,
-    href: "https://www.linkedin.com/in/eman-radwan99/",
+    href: socialLinks[0].href,
   },
   {
-    title: "GitHub",
+    title: socialLinks[1].title,
     icon: <IconBrandGithub className="h-full w-full" />,
-    href: "https://github.com/EmanRadwan114",
+    href: socialLinks[1].href,
   },
   {
-    title: "CV",
+    title: socialLinks[2].title,
     icon: <IconFileCv className="h-full w-full" />,
-    href: "https://drive.google.com/file/d/1QOv6kR8aXfm6j6ZZXbbqUvNYrHBMJ9GR/view?usp=sharing",
+    href: socialLinks[2].href,
   },
 ];
 

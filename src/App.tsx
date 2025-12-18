@@ -1,13 +1,15 @@
+import About from "./components/About";
 import { FloatingIcons } from "./components/FloatingIcons";
-import { Navs } from "./components/Navs";
+import { Projects } from "./components/Projects";
 import { SiteNavbar } from "./components/SiteNavbar";
 
 export function App() {
   return (
     <>
       <SiteNavbar />
+      <About />
       <FloatingIcons />
-      <Navs />
+      <Projects />
     </>
   );
 }
