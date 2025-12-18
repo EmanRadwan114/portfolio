@@ -47,9 +47,9 @@ export function SiteNavbar() {
             className="flex items-center justify-center border bg-background text-primary shadow-md"
           >
             {resolvedTheme === "dark" ? (
-              <IconSun stroke={2} size={38} className="p-2" />
+              <IconSun stroke={2} size={38} className="p-1.5" />
             ) : (
-              <IconMoon stroke={2} size={38} className="p-2" />
+              <IconMoon stroke={2} size={38} className="p-1.5" />
             )}
           </NavbarButton>
         </NavBody>
@@ -85,9 +85,9 @@ export function SiteNavbar() {
               className="w-fit flex items-center justify-center border bg-background text-primary shadow-md"
             >
               {resolvedTheme === "dark" ? (
-                <IconSun stroke={2} size={38} className="p-2" />
+                <IconSun stroke={2} size={38} className="p-1.5" />
               ) : (
-                <IconMoon stroke={2} size={38} className="p-2" />
+                <IconMoon stroke={2} size={38} className="p-1.5" />
               )}
             </NavbarButton>
           </MobileNavMenu>
