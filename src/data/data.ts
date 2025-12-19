@@ -53,7 +53,7 @@ export const socialLinks = [
   },
   {
     title: "CV",
-    href: "https://drive.google.com/file/d/1QOv6kR8aXfm6j6ZZXbbqUvNYrHBMJ9GR/view?usp=sharing",
+    href: "https://drive.google.com/file/d/1Rsn7yFeh5fLO1mFT5UyokbiLHtYcbq-C/view?usp=sharing",
   },
   {
     title: "Email",
