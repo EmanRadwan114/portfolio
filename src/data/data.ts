@@ -65,6 +65,6 @@ export const socialLinks = [
   },
   {
     title: "Whatsapp",
-    href: "https://wa.me/1023354420",
+    href: "https://wa.me/201023354420",
   },
 ];

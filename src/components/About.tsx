@@ -117,7 +117,7 @@ const About: React.FC = () => {
 
           {/* cv */}
           <a
-            href="../assets/Eman-Radwan-CV-Frontend-Developer.pdf"
+            href="/Eman-Radwan-CV-Frontend-Developer.pdf"
             download="Eman-Radwan-CV-Frontend-Developer.pdf"
             className="inline-block flex-1"
             target="_blank"
