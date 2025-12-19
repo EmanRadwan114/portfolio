@@ -1,10 +1,11 @@
 import { FloatingDock } from "@/components/ui/floating-dock";
-import { socialLinks } from "@/data/profileInfo";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconFileCv,
 } from "@tabler/icons-react";
+import Container from "./ui/Container";
+import { socialLinks } from "@/data/data";
 
 const links = [
   {
@@ -26,8 +27,10 @@ const links = [
 
 export function FloatingIcons() {
   return (
-    <div className="flex items-center justify-center w-full">
-      <FloatingDock items={links} />
-    </div>
+    <Container>
+      <div className="flex items-center justify-center w-full">
+        <FloatingDock items={links} />
+      </div>
+    </Container>
   );
 }

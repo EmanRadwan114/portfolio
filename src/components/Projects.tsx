@@ -1,6 +1,8 @@
 "use client";
 
+import Container from "./ui/Container";
 import { ProjectCard } from "./ui/ProjectCard";
+import SectionHeader from "./ui/SectionHeader";
 import { Tabs } from "./ui/tabs";
 
 export function Projects() {
@@ -33,8 +35,18 @@ export function Projects() {
   ];
 
   return (
-    <div className="relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start py-10">
-      <Tabs tabs={tabs} />
-    </div>
+    <section
+      className="relative flex flex-col items-start justify-start"
+      id="projects"
+    >
+      <Container className="border-b border-b-muted py-20">
+        <SectionHeader
+          title="projects"
+          description={` A showcase of my recent work, highlighting responsive web apps, MERN
+          stack projects, and clean, user-friendly designs.`}
+        />
+        <Tabs tabs={tabs} />
+      </Container>
+    </section>
   );
 }
