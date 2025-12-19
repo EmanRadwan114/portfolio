@@ -23,7 +23,7 @@ export function ProjectCard() {
         </p>
         {/* skills */}
         <div className="flex gap-2 mb-3">
-          <Badge className="bg-secondary/80 text-secondary-foreground">
+          <Badge className="bg-secondary/50 dark:bg-secondary/80 text-secondary-foreground">
             HTML
           </Badge>
         </div>

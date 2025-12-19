@@ -47,6 +47,17 @@ const links = [
   },
 ];
 
+const personalInfo = [
+  {
+    title: "Cairo, Egypt",
+    icon: <IconMapPin stroke={2} className="text-primary size-6" />,
+  },
+  {
+    title: socialLinks[3].href,
+    icon: <IconMail stroke={2} className="size-6 text-primary" />,
+  },
+];
+
 const About: React.FC = () => {
   const [current, setCurrent] = useState(0);
 
@@ -57,7 +68,7 @@ const About: React.FC = () => {
     return () => clearTimeout(timeout);
   }, [current]);
   return (
-    <section className="min-h-[85vh] items-center" id="about">
+    <section className="min-h-[100vh] items-center" id="about">
       <Container className="grid grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-10 xl:justify-items-end border-b border-b-muted pt-12 pb-20 lg:pt-24">
         {/* info */}
         <div>
@@ -91,18 +102,17 @@ const About: React.FC = () => {
             modern, user-friendly web applications.
           </p>
 
+          {/* personal info */}
           <div className="flex flex-col lg:flex-row gap-x-4 gap-y-2 lg:items-center my-5">
-            {/* location */}
-            <div className="text-foreground flex gap-2 items-center text-base">
-              <IconMapPin stroke={2} className="text-primary size-6" />
-              <span>Cairo, Egypt</span>
-            </div>
-
-            {/* email */}
-            <div className="text-foreground flex gap-2 items-center text-base">
-              <IconMail stroke={2} className="size-6 text-primary" />
-              <span>{socialLinks[3].href}</span>
-            </div>
+            {personalInfo.map((item) => (
+              <div
+                className="text-foreground flex gap-2 items-center text-base"
+                key={item.title}
+              >
+                {item.icon}
+                <span>{item.title}</span>
+              </div>
+            ))}
           </div>
 
           {/* cv */}

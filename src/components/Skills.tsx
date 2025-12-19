@@ -64,7 +64,7 @@ const Skills: React.FC = () => {
               key={skill.title}
               variants={itemVariants}
               layout
-              className="flex flex-col gap-2 items-center bg-accent p-4 rounded-lg w-32"
+              className="flex flex-col gap-2 items-center bg-secondary/50 dark:bg-accent p-4 rounded-lg w-32"
               whileHover={{ scale: 1.05, y: -5 }} // bounce up slightly
               transition={{
                 type: "spring",

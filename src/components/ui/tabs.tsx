@@ -27,7 +27,7 @@ export const Tabs = ({
     <>
       <div
         className={cn(
-          "flex flex-row flex-wrap sm:flex-nowrap items-center justify-center relative max-w-full w-full gap-2",
+          "flex flex-row flex-wrap sm:flex-nowrap items-center justify-center relative max-w-full w-full gap-2 mb-10",
           containerClassName
         )}
       >
@@ -38,7 +38,7 @@ export const Tabs = ({
             whileHover={{ scale: 1.1, y: -2 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             className={cn(
-              "relative px-4 py-2 rounded-full cursor-pointer",
+              "relative px-4 py-2 rounded-full cursor-pointer group",
               tabClassName
             )}
             style={{ transformStyle: "preserve-3d" }}
@@ -48,13 +48,13 @@ export const Tabs = ({
                 layoutId="clickedbutton"
                 transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                 className={cn(
-                  "absolute inset-0 bg-accent/80 rounded-full",
+                  "absolute inset-0 bg-accent/40 rounded-full ",
                   activeTabClassName
                 )}
               />
             )}
 
-            <span className="relative block text-black dark:text-white capitalize">
+            <span className="relative block text-foreground capitalize group-hover:text-primary transition-colors">
               {tab.title}
             </span>
           </motion.button>

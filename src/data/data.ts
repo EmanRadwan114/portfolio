@@ -59,4 +59,12 @@ export const socialLinks = [
     title: "Email",
     href: "emanalaa11499@gmail.com",
   },
+  {
+    title: "Phone",
+    href: "+20 102 335 4420",
+  },
+  {
+    title: "Whatsapp",
+    href: "https://wa.me/1023354420",
+  },
 ];
