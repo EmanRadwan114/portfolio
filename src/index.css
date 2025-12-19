@@ -153,4 +153,9 @@
   html {
     @apply font-sans;
   }
+
+  body,
+  html {
+    scroll-behavior: smooth;
+  }
 }
