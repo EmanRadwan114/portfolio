@@ -130,7 +130,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-accent/80 z-0 pointer-events-none"
+              className="absolute inset-0 h-full w-full rounded-full bg-accent/40 z-0 pointer-events-none"
               transition={{ type: "spring", bounce: 0.2, duration: 0.7 }}
             />
           )}

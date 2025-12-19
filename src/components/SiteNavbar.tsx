@@ -40,7 +40,7 @@ export function SiteNavbar() {
 
   return (
     <header className="w-full py-2">
-      <Container className="fixed inset-x-0 top-1 z-40 w-full">
+      <Container className="fixed inset-x-0 top-2 z-40 w-full">
         <Navbar>
           {/* Desktop Navigation */}
           <NavBody>
