@@ -120,6 +120,8 @@ const About: React.FC = () => {
             href="../assets/Eman-Radwan-CV-Frontend-Developer.pdf"
             download="Eman-Radwan-CV-Frontend-Developer.pdf"
             className="inline-block flex-1"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Button className={"capitalize px-5 text-base"}>
               <IconDownload stroke={2} />

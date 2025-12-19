@@ -38,7 +38,7 @@ const FloatingDockMobile = ({
   const [open, setOpen] = useState(false);
   return (
     <div
-      className={cn("fixed bottom-15 end-5 block md:hidden z-999", className)}
+      className={cn("fixed bottom-32 end-6 block md:hidden z-999", className)}
     >
       <AnimatePresence>
         {open && (
@@ -77,7 +77,7 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="fixed end-5 bottom-5 flex h-10 w-10 items-center justify-center rounded-full border border-border shadow-md bg-muted/50 "
+        className="fixed end-6 bottom-22 flex h-10 w-10 items-center justify-center rounded-full border border-border shadow-md bg-muted/50 "
       >
         <IconLayoutNavbarCollapse className="size-5 text-secondary-foreground dark:text-primary-foreground" />
       </button>
