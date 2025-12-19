@@ -3,6 +3,7 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconFileCv,
+  IconMail,
 } from "@tabler/icons-react";
 import Container from "./ui/Container";
 import { socialLinks } from "@/data/data";
@@ -22,6 +23,11 @@ const links = [
     title: socialLinks[2].title,
     icon: <IconFileCv className="h-full w-full" />,
     href: socialLinks[2].href,
+  },
+  {
+    title: socialLinks[3].title,
+    icon: <IconMail className="h-full w-full" />,
+    href: `mailto:${socialLinks[3].href}`,
   },
 ];
 
