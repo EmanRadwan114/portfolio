@@ -1,10 +1,12 @@
 import type { TProjectCategories } from "./types";
 
-export interface IProjects {
+export interface IProject {
   title: string;
   description: string;
+  img: string;
   technologies: string[];
-  githubLink: URL;
-  demoLink: URL;
-  categories: TProjectCategories;
+  githubLink: string;
+  githubBackLink?: string;
+  demoLink?: string;
+  categories: TProjectCategories[];
 }

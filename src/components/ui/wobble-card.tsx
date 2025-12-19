@@ -41,7 +41,7 @@ export const WobbleCard = ({
         containerClassName
       )}
     >
-      <div className="relative rounded-lg border border-border bg-card overflow-hidden">
+      <div className="relative rounded-lg border border-border bg-card overflow-hidden h-full">
         <motion.div
           style={{
             transform: isHovering
@@ -49,7 +49,7 @@ export const WobbleCard = ({
               : "translate3d(0px, 0px, 0) scale3d(1, 1, 1)",
             transition: "transform 0.1s ease-out",
           }}
-          className={className}
+          className={cn("h-full", className)}
         >
           {children}
         </motion.div>

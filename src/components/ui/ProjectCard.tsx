@@ -1,41 +1,74 @@
+import type { IProject } from "@/types/interfaces";
 import Badge from "./badge";
 import { Button } from "./button";
 import { WobbleCard } from "./wobble-card";
+import { IconExternalLink } from "@tabler/icons-react";
 
-export function ProjectCard() {
+interface IProps {
+  project: IProject;
+}
+
+const ProjectCard: React.FC<IProps> = ({ project }) => {
   return (
-    <WobbleCard containerClassName="group">
+    <WobbleCard
+      containerClassName="group h-full"
+      className="flex flex-col h-full"
+    >
       {/* img */}
-      <div className="h-42 overflow-hidden">
+      <div className="h-48 overflow-hidden">
         <img
-          src="https://saifmohamedsv.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2FLDrvgvCM%2Fnzmly.png&w=640&q=75"
-          alt="img"
-          className="rounded-t-lg"
+          src={project.img}
+          alt={project.title}
+          className="rounded-t-lg h-full mx-auto w-full"
         />
       </div>
-      <div className="p-5">
+      <div className="p-5 flex-1 flex flex-col">
         {/* description */}
-        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors">
-          No shirt, no shoes, no weapons.
-        </h3>
-        <p className="text-muted-foreground mb-2">
-          If someone yells “stop!”, goes limp, or taps out, the fight is over.
-        </p>
+        <div className="flex justify-between">
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors">
+            {project.title}
+          </h3>
+
+          {project.githubBackLink && (
+            <a href={project.githubBackLink} target="_blank">
+              <Button
+                className={"w-full text-muted-foreground text-base p-0"}
+                variant={"link"}
+              >
+                Backend GitHub
+                <IconExternalLink stroke={2} className="-mt-0.5" />
+              </Button>
+            </a>
+          )}
+        </div>
+        <p className="text-muted-foreground mb-3">{project.description}</p>
+
         {/* skills */}
-        <div className="flex gap-2 mb-3">
-          <Badge className="bg-secondary/50 dark:bg-secondary/80 text-secondary-foreground">
-            HTML
-          </Badge>
+        <div className="flex gap-1.5 mb-3 flex-wrap">
+          {project.technologies.map((item) => (
+            <Badge
+              className="bg-secondary/50 dark:bg-secondary/80 text-secondary-foreground"
+              key={item}
+            >
+              {item}
+            </Badge>
+          ))}
         </div>
 
         {/* /links */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <Button className="flex-1" variant={"outline"}>
-            Github
-          </Button>
-          <Button className="flex-1">Live Demo</Button>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-auto">
+          <a href={project.githubLink} target="_blank" className="flex-1">
+            <Button variant={"outline"} className={"w-full"}>
+              GitHub
+            </Button>
+          </a>
+          <a href={project.demoLink} target="_blank" className="flex-1">
+            <Button className={"w-full"}>Demo</Button>
+          </a>
         </div>
       </div>
     </WobbleCard>
   );
-}
+};
+
+export default ProjectCard;

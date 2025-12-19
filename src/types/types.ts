@@ -3,4 +3,4 @@ export type TProjectCategories =
   | "fullstack"
   | "react"
   | "next"
-  | "ui";
+  | "UI";
