@@ -29,7 +29,7 @@ const ProjectCard: React.FC<IProps> = ({ project }) => {
             {project.title}
           </h3>
 
-          {project.githubBackLink && (
+          {project.githubBackLink !== null && (
             <a href={project.githubBackLink} target="_blank">
               <Button
                 className={"w-full text-muted-foreground text-base p-0"}

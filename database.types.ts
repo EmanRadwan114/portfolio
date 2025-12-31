@@ -20,7 +20,7 @@ export type Database = {
         Row: {
           categories: TProjectCategories[];
           created_at: string;
-          demoLink: string | null;
+          demoLink: string;
           description: string;
           githubBackLink: string | null;
           githubLink: string;

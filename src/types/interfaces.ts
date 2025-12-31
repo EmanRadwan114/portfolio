@@ -8,8 +8,8 @@ export interface IProject {
   img_url: string;
   technologies: string[];
   githubLink: string;
-  githubBackLink?: string | null;
-  demoLink?: string;
+  githubBackLink: string | null;
+  demoLink: string;
   categories: TProjectCategories[];
   created_at?: string;
 }
