@@ -67,7 +67,7 @@ const Skills: React.FC = () => {
         />
 
         {isLoading ? (
-          <div className="flex flex-wrap items-center justify-center gap-4 lg:px-10">
+          <div className="flex flex-wrap items-center justify-center gap-4 lg:px-10 xl:px-24">
             {Array.from({ length: 10 }, (_, i) => i + 1).map((item) => (
               <SkillIconSkeleton key={item} />
             ))}
@@ -79,7 +79,7 @@ const Skills: React.FC = () => {
                 <AnimatePresence mode="popLayout">
                   <motion.div
                     key={page} // Force re-mount for stagger animation on every page change
-                    className="flex flex-wrap items-center justify-center gap-4 lg:px-10"
+                    className="flex flex-wrap items-center justify-center gap-4 lg:px-10 xl:px-28"
                     variants={containerVariants}
                     initial="hidden"
                     animate="show"
