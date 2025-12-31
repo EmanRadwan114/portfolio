@@ -9,7 +9,7 @@ export interface IProject {
   technologies: string[];
   githubLink: string;
   githubBackLink?: string | null;
-  demoLink?: string | null;
+  demoLink?: string;
   categories: TProjectCategories[];
   created_at?: string;
 }
