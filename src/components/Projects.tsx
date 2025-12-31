@@ -51,7 +51,7 @@ export function Projects() {
   }, [data, activeValue]);
 
   // pagination
-  const LIMIT_COUNT = 3;
+  const LIMIT_COUNT = 6;
   const displayedProjects = useMemo(() => {
     return filteredProjects.slice((page - 1) * LIMIT_COUNT, page * LIMIT_COUNT);
   }, [page, filteredProjects]);
