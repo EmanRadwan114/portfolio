@@ -1,7 +1,7 @@
 import type { IProject } from "@/types/interfaces";
-import Badge from "./badge";
-import { Button } from "./button";
-import { WobbleCard } from "./wobble-card";
+import Badge from "./ui/badge";
+import { Button } from "./ui/button";
+import { WobbleCard } from "./ui/wobble-card";
 import { IconExternalLink } from "@tabler/icons-react";
 
 interface IProps {
@@ -17,12 +17,12 @@ const ProjectCard: React.FC<IProps> = ({ project }) => {
       {/* img */}
       <div className="h-48 overflow-hidden">
         <img
-          src={project.img}
+          src={project.img_url}
           alt={project.title}
-          className="rounded-t-lg h-full mx-auto w-full"
+          className="rounded-t-lg h-full w-full object-cover"
         />
       </div>
-      <div className="p-5 flex-1 flex flex-col">
+      <div className="p-3 flex-1 flex flex-col">
         {/* description */}
         <div className="flex justify-between">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors">

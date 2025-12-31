@@ -9,7 +9,7 @@ const WhatsappIcon: React.FC = () => {
       href={socialLinks[5].href}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed end-5 bottom-5 z-50 block"
+      className="fixed end-5 bottom-3 z-50 block"
       // Floating Animation
       animate={{
         y: [0, -10],

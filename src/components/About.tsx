@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Button } from "./ui/button";
 import CodeSnippet from "./CodeSnippet";
-import Container from "./ui/Container";
+import Container from "./shared/Container";
 import { socialLinks } from "@/data/data";
 
 const sentences = [

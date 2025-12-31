@@ -10,7 +10,7 @@ const CodeSnippet: React.FC = () => {
           <span className="inline-block size-2 sm:size-3 bg-green-500 rounded-full"></span>
         </div>
         <span className="text-muted-foreground text-xs sm:text-base">
-          developer.tsx
+          developer.js
         </span>
       </div>
       <div className="bg-neutral-100 dark:bg-neutral-800 rounded-b-lg py-5 px-3 sm:px-7 w-full text-foreground/80 font-mono text-xs sm:text-base">
@@ -41,7 +41,7 @@ export default developer;`}
     Graduate\`,
   linkedin: "Active Member",
   passion: \`Learning New 
-  Skills\`,
+    Skills\`,
   goal: \`Build Impactful Web 
     Solutions\`,
   hobbies: [

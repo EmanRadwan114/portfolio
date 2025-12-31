@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-import { motion, type Variants } from "motion/react";
-import SectionHeader from "./ui/SectionHeader";
-import Container from "./ui/Container";
-import { skills } from "@/data/data";
-import { Button } from "./ui/button";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, type Variants } from "motion/react"; // 2025 standard import
+import SectionHeader from "./shared/SectionHeader";
+import Container from "./shared/Container";
+import useSkills from "@/hooks/useSkills";
+import PaginationComponent from "./shared/PaginationComponent";
+import type { ISkills } from "@/types/interfaces";
+import SkillIconSkeleton from "./skeleton/SkillsSkeleton";
 
-//———————————————————————————————— variants ————————————————————————————————
+//———————————————————————————————— framer motion variant ————————————————————————————————
 const containerVariants: Variants = {
-  hidden: {},
+  hidden: { opacity: 0 },
   show: {
-    transition: {
-      staggerChildren: 0.1,
-    },
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { staggerChildren: 0.05, staggerDirection: -1 }, // Reverse stagger on exit
   },
 };
 
@@ -23,90 +28,93 @@ const itemVariants: Variants = {
     scale: 1,
     transition: { duration: 0.4, ease: "easeOut" },
   },
+  exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
 };
 
-//———————————————————————————————— single icon content ————————————————————————————————
-const IconContent: React.FC<{ skill: { title: string; icon: string } }> = ({
-  skill,
-}) => (
+//———————————————————————————————— icon content ————————————————————————————————
+const IconContent: React.FC<{ skill: ISkills }> = ({ skill }) => (
   <>
-    <img src={skill.icon} alt={skill.title} className="size-12" />
+    <img src={skill.img_url} alt={skill.title} className="size-12" />
     <span>{skill.title}</span>
   </>
 );
 
+//———————————————————————————————— main component ————————————————————————————————
 const Skills: React.FC = () => {
-  const [seeMore, setSeeMore] = useState(false);
+  const PAGE_LIMIT = 10;
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useSkills(page);
 
-  const initialSkills = skills.slice(0, 12);
-  const extraSkills = skills.slice(12);
+  // for smooth navigation during page change
+  const skillsRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    skillsRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [page]);
+
+  const handlePagination = (currentPage: number) => {
+    setPage(currentPage);
+  };
 
   return (
-    <section id="skills">
+    <section id="skills" ref={skillsRef}>
       <Container className="border-b border-b-muted py-20">
         <SectionHeader
           title="Skills"
-          description="A curated set of tools and technologies I use to build modern, scalable, and user-friendly web applications."
+          description="A collection of tools and technologies I use to build modern, scalable, and user-friendly web applications."
         />
 
-        {/* Parent container with stagger + layout */}
-        <motion.div
-          className="flex flex-wrap items-center justify-center gap-4 lg:px-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          layout
-        >
-          {/* Initial items */}
-          {initialSkills.map((skill) => (
-            <motion.div
-              key={skill.title}
-              variants={itemVariants}
-              layout
-              className="flex flex-col gap-2 items-center bg-secondary/50 dark:bg-accent p-4 rounded-lg w-32"
-              whileHover={{ scale: 1.05, y: -5 }} // bounce up slightly
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 10,
-              }}
-            >
-              <IconContent skill={skill} />
-            </motion.div>
-          ))}
-
-          {/* Extra items */}
-          {seeMore &&
-            extraSkills.map((skill) => (
-              <motion.div
-                key={skill.title}
-                variants={itemVariants}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-                layout
-                className="flex flex-col gap-2 items-center bg-accent p-4 rounded-lg w-32"
-                whileHover={{ scale: 1.05, y: -5 }} // bounce up slightly
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 10,
-                }}
-              >
-                <IconContent skill={skill} />
-              </motion.div>
+        {isLoading ? (
+          <div className="flex flex-wrap items-center justify-center gap-4 lg:px-10">
+            {Array.from({ length: 10 }, (_, i) => i + 1).map((item) => (
+              <SkillIconSkeleton key={item} />
             ))}
-        </motion.div>
+          </div>
+        ) : (
+          <>
+            {data && (
+              <>
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={page} // Force re-mount for stagger animation on every page change
+                    className="flex flex-wrap items-center justify-center gap-4 lg:px-10"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                  >
+                    {data.skills.map((skill) => (
+                      <motion.div
+                        key={skill.id}
+                        variants={itemVariants}
+                        layout // Enables smooth position swapping
+                        className="flex flex-col gap-2 items-center bg-secondary/50 dark:bg-accent p-4 rounded-lg w-32"
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 15,
+                        }}
+                      >
+                        <IconContent skill={skill} />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
 
-        <div className="flex justify-center mt-8">
-          <Button
-            className="px-8 text-base"
-            onClick={() => setSeeMore((prev) => !prev)}
-          >
-            {seeMore ? "See Less" : "See More"}
-          </Button>
-        </div>
+                <PaginationComponent
+                  classname="mt-12"
+                  totalCount={data.totalCount}
+                  currentPage={page}
+                  limit={PAGE_LIMIT}
+                  handlePagination={handlePagination}
+                />
+              </>
+            )}
+          </>
+        )}
       </Container>
     </section>
   );

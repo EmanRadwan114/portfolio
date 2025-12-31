@@ -1,27 +1,32 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-
-type Tab = {
-  title: string;
-  value: string;
-  content?: string | React.ReactNode;
-};
+import type { ReactNode } from "react";
+import type { TProjectCategories } from "@/types/types";
+import type { ITab } from "@/types/interfaces";
 
 export const Tabs = ({
   tabs: propTabs,
+  activeValue,
+  setActiveValue,
   containerClassName,
   activeTabClassName,
   tabClassName,
   contentClassName,
+  content,
+  page,
 }: {
-  tabs: Tab[];
+  tabs: ITab[];
+  activeValue: string;
+  setActiveValue: (param: TProjectCategories) => void;
   containerClassName?: string;
   activeTabClassName?: string;
   tabClassName?: string;
   contentClassName?: string;
+  content: ReactNode[];
+  page: number;
 }) => {
-  const [active, setActive] = useState<Tab>(propTabs[0]);
+  const activeTab =
+    propTabs.find((tab) => tab.value === activeValue) || propTabs[0];
 
   return (
     <>
@@ -33,8 +38,8 @@ export const Tabs = ({
       >
         {propTabs.map((tab) => (
           <motion.button
-            key={tab.title}
-            onClick={() => setActive(tab)}
+            key={tab.value}
+            onClick={() => setActiveValue(tab.value)}
             whileHover={{ scale: 1.1, y: -2 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             className={cn(
@@ -43,12 +48,12 @@ export const Tabs = ({
             )}
             style={{ transformStyle: "preserve-3d" }}
           >
-            {active.value === tab.value && (
+            {activeTab?.value === tab.value && (
               <motion.div
                 layoutId="clickedbutton"
                 transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                 className={cn(
-                  "absolute inset-0 bg-accent/40 rounded-full ",
+                  "absolute inset-0 bg-accent/50 rounded-full",
                   activeTabClassName
                 )}
               />
@@ -61,7 +66,14 @@ export const Tabs = ({
         ))}
       </div>
 
-      <FadeInDiv active={active} className={cn("mt-8", contentClassName)} />
+      {activeTab && (
+        <FadeInDiv
+          active={activeTab}
+          className={cn("mt-8", contentClassName)}
+          content={content}
+          page={page}
+        />
+      )}
     </>
   );
 };
@@ -69,62 +81,57 @@ export const Tabs = ({
 export const FadeInDiv = ({
   className,
   active,
+  content,
+  page,
 }: {
   className?: string;
-  active: Tab;
+  active: ITab;
+  content: ReactNode[];
+  page: number;
 }) => {
-  // If content is a single element, we try to see if it has children to stagger
-  // Otherwise, we wrap it in an array.
-  const items = Array.isArray(active.content)
-    ? active.content
-    : [active.content];
-
   return (
     <div className="w-full">
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          key={active.value}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          variants={{
-            show: {
-              transition: {
-                staggerChildren: 0.15, // Increase this to see the "wave" clearly
-                delayChildren: 0.15,
-              },
+      <motion.div
+        key={active.value} // only track the active tab
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+        variants={{
+          show: {
+            transition: {
+              staggerChildren: 0.15,
+              delayChildren: 0.15,
             },
-            hidden: {
-              transition: {
-                staggerChildren: 0.05,
-                staggerDirection: -1,
-              },
+          },
+          hidden: {
+            transition: {
+              staggerChildren: 0.05,
+              staggerDirection: -1,
             },
-          }}
-          className={cn(
-            "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4",
-            className
-          )}
-        >
-          {items.map((item, idx) => (
-            <motion.div
-              key={`${active.value}-${idx}`}
-              variants={{
-                hidden: { opacity: 0, scale: 0.5, rotateX: -45, y: 50 },
-                show: { opacity: 1, scale: 1, rotateX: 0, y: 0 },
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 15,
-              }}
-              style={{ transformOrigin: "top center" }}
-            >
-              {item}
-            </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+          },
+        }}
+        className={cn(className)}
+        layout
+      >
+        {content.map((item, idx) => (
+          <motion.div
+            key={`${active.value}-${page}-${idx}`} // animate items per page
+            variants={{
+              hidden: { opacity: 0, scale: 0.5, rotateX: -45, y: 50 },
+              show: { opacity: 1, scale: 1, rotateX: 0, y: 0 },
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 150,
+              damping: 15,
+            }}
+            style={{ transformOrigin: "top center" }}
+            layout
+          >
+            {item}
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 };

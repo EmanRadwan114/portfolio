@@ -1,4 +1,3 @@
-"use client";
 import {
   Navbar,
   NavBody,
@@ -13,7 +12,7 @@ import {
 import { useTheme } from "@/contexts/ThemeContext";
 import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useState } from "react";
-import Container from "./ui/Container";
+import Container from "./shared/Container";
 
 const navItems = [
   {
@@ -39,7 +38,7 @@ export function SiteNavbar() {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
-    <header className="w-full py-2">
+    <header className="w-full">
       <Container className="fixed inset-x-0 top-2 z-40 w-full">
         <Navbar>
           {/* Desktop Navigation */}

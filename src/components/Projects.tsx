@@ -1,65 +1,107 @@
-"use client";
-
-import { projects } from "@/data/projects";
-import Container from "./ui/Container";
-import ProjectCard from "./ui/ProjectCard";
-import SectionHeader from "./ui/SectionHeader";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import Container from "./shared/Container";
+import PaginationComponent from "./shared/PaginationComponent";
+import SectionHeader from "./shared/SectionHeader";
+import useProjects from "@/hooks/useProjects";
+import { WobbleCardSkeleton } from "./skeleton/WobbleSkeleton";
+import type { ITab } from "@/types/interfaces";
 import { Tabs } from "./ui/tabs";
+import ProjectCard from "./ProjectCard";
 import type { TProjectCategories } from "@/types/types";
 
+const TABS_CONFIG: ITab[] = [
+  { title: "featured", value: "featured" },
+  { title: "fullstack", value: "fullstack" },
+  { title: "react", value: "react" },
+  { title: "next", value: "next" },
+  { title: "UI", value: "UI" },
+];
+
 export function Projects() {
-  const getProjectByCateg = (categ: TProjectCategories) =>
-    projects.filter((item) => item.categories.includes(categ));
+  // Track active tab by value (stable) instead of object reference
+  const [activeValue, setActiveValue] = useState<TProjectCategories>(
+    TABS_CONFIG[0]?.value || "featured"
+  );
 
-  const displayProjectsByCateg = (categ: TProjectCategories) => {
-    return getProjectByCateg(categ).map((project) => (
-      <ProjectCard project={project} />
-    ));
-  };
+  const [activeTabContent, setActiveTabContent] = useState<ReactNode[]>([]);
 
-  console.log(getProjectByCateg("featured"));
-  console.log(displayProjectsByCateg("featured"));
+  const [page, setPage] = useState(1);
 
-  const tabs = [
-    {
-      title: "featured",
-      value: "featured",
-      content: [...displayProjectsByCateg("featured")],
-    },
-    {
-      title: "fullstack",
-      value: "fullstack",
-      content: [...displayProjectsByCateg("fullstack")],
-    },
-    {
-      title: "react",
-      value: "react",
-      content: [...displayProjectsByCateg("react")],
-    },
-    {
-      title: "next",
-      value: "next",
-      content: [...displayProjectsByCateg("next")],
-    },
-    {
-      title: "UI",
-      value: "ui",
-      content: [...displayProjectsByCateg("UI")],
-    },
-  ];
+  const { data, isLoading } = useProjects();
+
+  // for smooth navigation during page change
+  const projectsRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    projectsRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [page]);
+
+  // reset page when nav changes
+  useEffect(() => {
+    setPage(1);
+  }, [activeValue]);
+
+  // filter based on active category
+  const filteredProjects = useMemo(() => {
+    return (
+      data?.filter((project) => project.categories.includes(activeValue)) || []
+    );
+  }, [data, activeValue]);
+
+  // pagination
+  const LIMIT_COUNT = 3;
+  const displayedProjects = useMemo(() => {
+    return filteredProjects.slice((page - 1) * LIMIT_COUNT, page * LIMIT_COUNT);
+  }, [page, filteredProjects]);
+
+  // get tab content
+  const SKELETON_COUNT = 6;
+  useEffect(() => {
+    if (isLoading) {
+      const items = Array.from({ length: SKELETON_COUNT }).map((_, idx) => (
+        <WobbleCardSkeleton key={`skeleton-${idx}`} />
+      ));
+      setActiveTabContent(items);
+    } else {
+      const items = displayedProjects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ));
+      setActiveTabContent(items);
+    }
+  }, [isLoading, activeValue, displayedProjects]);
 
   return (
     <section
       className="relative flex flex-col items-start justify-start"
       id="projects"
+      ref={projectsRef}
     >
       <Container className="border-b border-b-muted py-20">
         <SectionHeader
           title="projects"
-          description={` A showcase of my recent work, highlighting responsive web apps, MERN
-          stack projects, and clean, user-friendly designs.`}
+          description="A showcase of recent projects highlighting responsive, user-centered web applications with clean code and strong user experience."
         />
-        <Tabs tabs={tabs} />
+
+        <Tabs
+          tabs={TABS_CONFIG}
+          activeValue={activeValue}
+          setActiveValue={setActiveValue}
+          contentClassName="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
+          content={activeTabContent}
+          page={page}
+        />
+
+        <PaginationComponent
+          currentPage={page}
+          limit={LIMIT_COUNT}
+          totalCount={filteredProjects.length}
+          classname="mt-10"
+          handlePagination={(currentPage) => {
+            setPage(currentPage);
+          }}
+        />
       </Container>
     </section>
   );

@@ -1,8 +1,8 @@
 import React from "react";
 import { SparklesCore } from "./ui/sparkles";
-import Container from "./ui/Container";
+import Container from "./shared/Container";
 import { useTheme } from "@/contexts/ThemeContext";
-import SectionHeader from "./ui/SectionHeader";
+import SectionHeader from "./shared/SectionHeader";
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import { socialLinks } from "@/data/data";
 import { Button } from "./ui/button";
@@ -64,7 +64,7 @@ const Contacts: React.FC = () => {
             background="transparent"
             minSize={resolvedTheme === "dark" ? 0.6 : 1}
             maxSize={resolvedTheme === "dark" ? 1.4 : 2}
-            particleDensity={100}
+            particleDensity={50}
             className="w-full h-full"
             particleColor={resolvedTheme === "dark" ? "#fafafa" : "#844477"}
           />

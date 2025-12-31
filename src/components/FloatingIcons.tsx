@@ -5,7 +5,7 @@ import {
   IconFileCv,
   IconMail,
 } from "@tabler/icons-react";
-import Container from "./ui/Container";
+import Container from "./shared/Container";
 import { socialLinks } from "@/data/data";
 
 const links = [
