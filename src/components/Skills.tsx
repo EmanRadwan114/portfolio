@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "motion/react"; // 2025 standard import
 import SectionHeader from "./shared/SectionHeader";
 import Container from "./shared/Container";
@@ -46,20 +46,23 @@ const Skills: React.FC = () => {
   const { data, isLoading } = useSkills(page);
 
   // for smooth navigation during page change
-  const skillsRef = useRef<HTMLElement | null>(null);
-  useEffect(() => {
-    skillsRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, [page]);
+  // const skillsRef = useRef<HTMLElement | null>(null);
+  // useEffect(() => {
+  //   skillsRef.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
+  // }, [page]);
 
   const handlePagination = (currentPage: number) => {
     setPage(currentPage);
   };
 
   return (
-    <section id="skills" ref={skillsRef}>
+    <section
+      id="skills"
+      // ref={skillsRef}
+    >
       <Container className="border-b border-b-muted py-20">
         <SectionHeader
           title="Skills"

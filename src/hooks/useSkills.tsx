@@ -5,7 +5,6 @@ const useSkills = (page = 1) => {
   return useQuery({
     queryKey: ["skills", page],
     queryFn: () => fetchSkills(page),
-    placeholderData: (previousData) => previousData, // Keeps UI populated during fetch
   });
 };
 

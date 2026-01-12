@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Container from "./shared/Container";
 import PaginationComponent from "./shared/PaginationComponent";
 import SectionHeader from "./shared/SectionHeader";
@@ -29,14 +29,14 @@ export function Projects() {
 
   const { data, isLoading } = useProjects();
 
-  // for smooth navigation during page change
-  const projectsRef = useRef<HTMLElement | null>(null);
-  useEffect(() => {
-    projectsRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, [page]);
+  // // for smooth navigation during page change
+  // const projectsRef = useRef<HTMLElement | null>(null);
+  // useEffect(() => {
+  //   projectsRef.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
+  // }, [page]);
 
   // reset page when nav changes
   useEffect(() => {
@@ -76,7 +76,7 @@ export function Projects() {
     <section
       className="relative flex flex-col items-start justify-start"
       id="projects"
-      ref={projectsRef}
+      // ref={projectsRef}
     >
       <Container className="border-b border-b-muted py-20">
         <SectionHeader
