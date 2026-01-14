@@ -68,12 +68,12 @@ const About: React.FC = () => {
     return () => clearTimeout(timeout);
   }, [current]);
   return (
-    <section className="min-h-[85vh] items-center" id="about">
+    <section className="min-h-[85vh] items-center pt-6 xl:pt-0" id="about">
       <Container className="grid grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-10 xl:justify-items-end border-b border-b-muted pt-12 pb-20 lg:pt-24">
         {/* info */}
         <div>
           {/* title */}
-          <div className="flex flex-col gap-y-5">
+          <div className="flex flex-col gap-y-2 xl:gap-y-5">
             <span className="text-base text-muted-foreground font-medium">
               Hello, I'm
             </span>
@@ -96,7 +96,7 @@ const About: React.FC = () => {
             </AnimatePresence>
           </div>
           {/* desc */}
-          <p className="mt-2 text-muted-foreground text-lg md:text-xl/relaxed">
+          <p className="text-muted-foreground text-lg md:text-xl/relaxed">
             Frontend Developer with expertise in the MERN stack. I actively
             engage on LinkedIn and love learning new skills. I enjoy creating
             modern, user-friendly web applications.
